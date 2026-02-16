@@ -198,39 +198,26 @@ with st.sidebar:
     # Navigation
     page = st.radio(
         "Navigation",
-        ["🏠 Dashboard", "🤖 Price Predictor", "📊 Analytics", "⚙️ Model Hub", "📜 History"],
+        [" Dashboard", " Price Predictor", " Analytics", " Model Hub", " History"],
         index=0
     )
     
     st.markdown("---")
     
-    # Quick Stats
-    if df is not None:
-        st.markdown("### 📊 Quick Stats")
-        st.metric("Total Laptops", f"{len(df):,}")
-        st.metric("Avg Price", f"{df['Price_Tsh'].mean()/1e6:.1f}M Tsh")
-        st.metric("Brands", df['Company'].nunique())
+   
     
-    st.markdown("---")
     
-    # System Status
-    st.markdown("### System Status")
-    status_color = "🟢" if base_model else "🔴"
-    st.markdown(f"{status_color} Database: {'Connected' if df is not None else 'Disconnected'}")
-    st.markdown(f"{status_color} AI Models: {'Active' if base_model else 'Inactive'}")
-    
-    st.markdown("---")
     
     # Support
     st.markdown("### 24/7 Support")
-    st.markdown("📞 +255 123 456 789")
-    st.markdown("✉️ support@laptoppredictor.co.tz")
+    st.markdown("📞 +255 655 540 648")
+
 
 # =============================================================================
 # DASHBOARD PAGE
 # =============================================================================
 if page == "🏠 Dashboard":
-    st.markdown("## 📊 Executive Dashboard")
+    st.markdown("##  Executive Dashboard")
     
     if df is None:
         st.error("Unable to load data. Please check your files.")
