@@ -310,22 +310,20 @@ st.markdown("""
 # SIDEBAR - Professional Navigation
 # =============================================================================
 with st.sidebar:
-    # Jaribu kupakia pic.jpg
+    # LOGO - Kutumia picha yako
     try:
-        with open("pic.jpg", "rb") as f:
+        with open("pic.jpg", "rb") as f:  # Badilisha hapa
             logo_base64 = base64.b64encode(f.read()).decode()
         st.markdown(f"""
-        <div class="sidebar-logo">
-            <img src="data:image/jpeg;base64,{logo_base64}" width="70" alt="Company Logo">
-            <h3>Laptop Predictor</h3>
-            <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem;">Enterprise Edition</p>
+        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); border-radius: 15px; margin-bottom: 1.5rem;">
+            <img src="data:image/jpg;base64,{logo_base64}" width="80">
+            <h3 style="color: white; margin-top: 0.5rem;">LAPTOP PREDICTOR</h3>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.8rem;">Enterprise Edition</p>
         </div>
         """, unsafe_allow_html=True)
     except FileNotFoundError:
-        st.warning("Logo haipatikani, tumia default icon.")
-        st.image("https://img.icons8.com/fluency/96/laptop.png", width=70)
+        st.warning("Picha haipatikani. Angalia kama faili ipo kwenye folder.")
 
-    # Navigation... (endelea na code yako iliyobaki)
     
     # Navigation
     page = st.radio(
