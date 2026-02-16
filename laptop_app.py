@@ -25,13 +25,13 @@ warnings.filterwarnings('ignore')
 # =============================================================================
 st.set_page_config(
     page_title="Laptop Price Predictor | Enterprise AI",
-    page_icon=None,  # Hakuna emoji
+    page_icon=None,
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # =============================================================================
-# CUSTOM CSS - Enterprise Styling (hakuna emojis)
+# CUSTOM CSS - Enterprise Styling
 # =============================================================================
 st.markdown("""
 <style>
@@ -44,25 +44,35 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    /* Enterprise Header */
+    /* Enterprise Header - Poa Sana */
     .enterprise-header {
         background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
-        padding: 2rem;
+        padding: 2.5rem;
         border-radius: 30px;
         margin-bottom: 2rem;
         box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        text-align: center;
     }
     
     .enterprise-title {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: 800;
         color: white;
         margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
     
     .enterprise-subtitle {
         color: rgba(255,255,255,0.9);
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        font-weight: 300;
+        border-bottom: 2px solid #ffd700;
+        display: inline-block;
+        padding-bottom: 0.5rem;
     }
     
     /* KPI Cards */
@@ -74,6 +84,11 @@ st.markdown("""
         text-align: center;
         box-shadow: 0 15px 35px rgba(102, 126, 234, 0.25);
         margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .kpi-card:hover {
+        transform: translateY(-5px);
     }
     
     .kpi-value {
@@ -112,6 +127,7 @@ st.markdown("""
         border-radius: 12px;
         font-weight: 500;
         border-left: 5px solid #00c853;
+        margin: 1rem 0;
     }
     
     /* Footer */
@@ -122,6 +138,7 @@ st.markdown("""
         border-radius: 20px;
         margin-top: 3rem;
         text-align: center;
+        box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
     }
     
     /* Sidebar styling */
@@ -131,15 +148,16 @@ st.markdown("""
     
     .sidebar-logo {
         text-align: center;
-        padding: 1rem;
+        padding: 1.5rem;
         background: rgba(255,255,255,0.1);
         border-radius: 15px;
         margin-bottom: 1.5rem;
+        border: 1px solid rgba(255,255,255,0.1);
     }
     
     .sidebar-logo img {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         filter: brightness(0) invert(1);
     }
     
@@ -147,36 +165,92 @@ st.markdown("""
         color: white;
         margin-top: 0.5rem;
         font-weight: 600;
+        font-size: 1.2rem;
     }
     
-    /* Sidebar info cards */
+    /* Sidebar info cards - Blue Style */
     .sidebar-info {
-        background: rgba(255,255,255,0.1);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 12px;
-        padding: 1rem;
+        padding: 1.2rem;
         margin-bottom: 1rem;
         color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     
     .sidebar-info .label {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
-        opacity: 0.7;
+        opacity: 0.9;
+        margin-bottom: 0.3rem;
     }
     
     .sidebar-info .value {
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: 700;
+        line-height: 1.2;
     }
     
+    .sidebar-info .small {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+    
+    /* Sidebar phone - Gold Style */
     .sidebar-phone {
         background: #ffd700;
         color: #1e3c72;
         border-radius: 50px;
-        padding: 0.5rem 1rem;
-        font-weight: 600;
+        padding: 0.8rem 1rem;
+        font-weight: 700;
         text-align: center;
         margin-top: 1rem;
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    /* Navigation radio styling */
+    .stRadio > div {
+        background: rgba(255,255,255,0.1);
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+    
+    .stRadio label {
+        color: white !important;
+        font-weight: 500;
+    }
+    
+    /* Form styling */
+    .stTextInput > div > div > input {
+        border-radius: 10px;
+    }
+    
+    .stSelectbox > div > div > select {
+        border-radius: 10px;
+    }
+    
+    .stSlider > div > div > div {
+        color: #1e3c72;
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 0.6rem 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(26, 115, 232, 0.3);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -223,17 +297,17 @@ df = load_data()
 base_model = load_base_model()
 
 # =============================================================================
-# ENTERPRISE HEADER (hakuna emoji)
+# ENTERPRISE HEADER - POA SANA
 # =============================================================================
 st.markdown("""
 <div class="enterprise-header">
-    <div class="enterprise-title">Laptop Price Predictor</div>
+    <div class="enterprise-title">LAPTOP PREDICTOR</div>
     <div class="enterprise-subtitle">Enterprise AI-Powered Pricing Intelligence System | Made in Tanzania</div>
 </div>
 """, unsafe_allow_html=True)
 
 # =============================================================================
-# SIDEBAR - Professional Navigation (hakuna emoji, iko info za brands na total)
+# SIDEBAR - Professional Navigation
 # =============================================================================
 with st.sidebar:
     # Logo
@@ -255,7 +329,7 @@ with st.sidebar:
     
     st.markdown("---")
     
-    # Information Section - Brands na Total Laptops
+    # Information Section - Brands na Total Laptops (Blue Cards)
     if df is not None:
         total_brands = df['Company'].nunique()
         total_laptops = len(df)
@@ -264,16 +338,19 @@ with st.sidebar:
         <div class="sidebar-info">
             <div class="label">Total Laptop Brands</div>
             <div class="value">{total_brands}</div>
+            <div class="small">manufacturers worldwide</div>
         </div>
+        
         <div class="sidebar-info">
             <div class="label">Total Laptops in Database</div>
             <div class="value">{total_laptops:,}</div>
+            <div class="small">unique models</div>
         </div>
         """, unsafe_allow_html=True)
     
     st.markdown("---")
     
-    # System Status - simple text
+    # System Status
     st.markdown("### System Status")
     if df is not None:
         st.markdown(f"Database: Connected ({len(df)} records)")
@@ -287,11 +364,11 @@ with st.sidebar:
     
     st.markdown("---")
     
-    # Contact - Phone Number tu (hakuna email)
+    # Contact - Phone Number tu (0655540648)
     st.markdown("### 24/7 Support")
     st.markdown("""
     <div class="sidebar-phone">
-        +255 123 456 789
+        0655 540 648
     </div>
     """, unsafe_allow_html=True)
 
@@ -316,10 +393,11 @@ if page == "Dashboard":
             """, unsafe_allow_html=True)
         
         with col2:
+            avg_price = df['Price_Tsh'].mean() / 1_000_000
             st.markdown(f"""
             <div class="kpi-card">
                 <div class="kpi-label">Average Price</div>
-                <div class="kpi-value">{df['Price_Tsh'].mean()/1e6:.1f}M</div>
+                <div class="kpi-value">{avg_price:.1f}M</div>
                 <div>Tsh</div>
             </div>
             """, unsafe_allow_html=True)
@@ -355,6 +433,13 @@ if page == "Dashboard":
             fig = px.bar(x=brand_avg.values, y=brand_avg.index, orientation='h', title='Average Price by Brand')
             fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
             st.plotly_chart(fig, use_container_width=True)
+        
+        # Recent Data
+        st.markdown("### Recent Laptop Models")
+        st.dataframe(
+            df[['Company', 'TypeName', 'Ram', 'PrimaryStorage', 'Price_Tsh']].head(10),
+            use_container_width=True
+        )
 
 # =============================================================================
 # PRICE PREDICTOR PAGE
@@ -529,12 +614,13 @@ elif page == "Price Predictor":
                 """, unsafe_allow_html=True)
             
             # Save to history
+            final_price = avg_price if len(predictions) > 1 else price
             st.session_state.prediction_history.append({
                 'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 'company': company,
                 'model': model_choice,
                 'specs': f"{typename} | {ram}GB | {primary_storage}GB",
-                'price': avg_price if len(predictions) > 1 else price
+                'price': final_price
             })
             
             st.markdown("""
@@ -612,9 +698,11 @@ elif page == "History":
         with col1:
             st.metric("Total Predictions", len(history_df))
         with col2:
-            st.metric("Average Price", f"{history_df['price'].mean():,.0f} Tsh")
+            avg_price = history_df['price'].mean()
+            st.metric("Average Price", f"{avg_price:,.0f} Tsh")
         with col3:
-            st.metric("Last Prediction", f"{history_df.iloc[-1]['price']:,.0f} Tsh")
+            last_price = history_df.iloc[-1]['price']
+            st.metric("Last Prediction", f"{last_price:,.0f} Tsh")
         
         # Table
         st.dataframe(history_df, use_container_width=True)
@@ -637,6 +725,10 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
+
+
+
 
 
             
