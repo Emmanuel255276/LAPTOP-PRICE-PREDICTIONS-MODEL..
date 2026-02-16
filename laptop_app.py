@@ -25,7 +25,7 @@ warnings.filterwarnings('ignore')
 # PAGE CONFIGURATION
 # =============================================================================
 st.set_page_config(
-    page_title="Laptop Price Predictor | Enterprise AI",
+    page_title="   LAPTOP PRICE PREDICTOR | ENTERPRISE AI",
     page_icon="🎯",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -198,7 +198,7 @@ with st.sidebar:
     # Navigation
     page = st.radio(
         "Navigation",
-        ["🏠 Dashboard", "🤖 Price Predictor", "📊 Analytics", "⚙️ Model Hub", "📜 History"],
+        [" Dashboard", " Price Predictor", " Analytics", " Model Hub", " History"],
         index=0
     )
     
@@ -206,31 +206,25 @@ with st.sidebar:
     
     # Quick Stats
     if df is not None:
-        st.markdown("### 📊 Quick Stats")
+        st.markdown("###  Quick Stats")
         st.metric("Total Laptops", f"{len(df):,}")
         st.metric("Avg Price", f"{df['Price_Tsh'].mean()/1e6:.1f}M Tsh")
         st.metric("Brands", df['Company'].nunique())
     
     st.markdown("---")
     
-    # System Status
-    st.markdown("### System Status")
-    status_color = "🟢" if base_model else "🔴"
-    st.markdown(f"{status_color} Database: {'Connected' if df is not None else 'Disconnected'}")
-    st.markdown(f"{status_color} AI Models: {'Active' if base_model else 'Inactive'}")
     
-    st.markdown("---")
     
     # Support
-    st.markdown("### 24/7 Support")
-    st.markdown("📞 +255 123 456 789")
-    st.markdown("✉️ support@laptoppredictor.co.tz")
+    st.markdown("### 24HRS/7 Support")
+    st.markdown("📞 +255 655540648")
+
 
 # =============================================================================
 # DASHBOARD PAGE
 # =============================================================================
 if page == "🏠 Dashboard":
-    st.markdown("## 📊 Executive Dashboard")
+    st.markdown("##   Executive Dashboard")
     
     if df is None:
         st.error("Unable to load data. Please check your files.")
@@ -275,7 +269,7 @@ if page == "🏠 Dashboard":
         col1, col2 = st.columns(2)
         
         with col1:
-            st.markdown("### 💰 Price Distribution")
+            st.markdown("###  Price Distribution")
             fig = px.histogram(df, x='Price_Tsh', nbins=50, title='Price Distribution')
             fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
             st.plotly_chart(fig, use_container_width=True)
@@ -290,8 +284,8 @@ if page == "🏠 Dashboard":
 # =============================================================================
 # PRICE PREDICTOR PAGE - FIXED
 # =============================================================================
-elif page == "🤖 Price Predictor":
-    st.markdown("## 🤖 AI Price Predictor")
+elif page == " Price Predictor":
+    st.markdown("##  AI Price Predictor")
     
     if df is None or base_model is None:
         st.error("System resources not available. Please contact support.")
@@ -470,17 +464,17 @@ elif page == "🤖 Price Predictor":
             
             st.markdown("""
             <div class="enterprise-success">
-                ✅ Prediction saved to history!
+                 Prediction saved to history!
             </div>
             """, unsafe_allow_html=True)
 
 # =============================================================================
 # ANALYTICS PAGE
 # =============================================================================
-elif page == "📊 Analytics" and df is not None:
-    st.markdown("## 📊 Advanced Analytics")
+elif page == " Analytics" and df is not None:
+    st.markdown("##  Advanced Analytics")
     
-    tab1, tab2, tab3 = st.tabs(["📈 Distributions", "🔗 Correlations", "📊 Brand Analysis"])
+    tab1, tab2, tab3 = st.tabs([" Distributions", " Correlations", " Brand Analysis"])
     
     with tab1:
         col1, col2 = st.columns(2)
@@ -551,7 +545,7 @@ elif page == "📜 History":
         st.dataframe(history_df, use_container_width=True)
         
         # Download
-        if st.button("📥 Download History"):
+        if st.button(" Download History"):
             csv = history_df.to_csv(index=False)
             b64 = base64.b64encode(csv.encode()).decode()
             href = f'<a href="data:file/csv;base64,{b64}" download="prediction_history.csv">Download CSV</a>'
