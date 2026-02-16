@@ -310,14 +310,22 @@ st.markdown("""
 # SIDEBAR - Professional Navigation
 # =============================================================================
 with st.sidebar:
-    # Logo
-    st.markdown("""
-    <div class="sidebar-logo">
-        <img src="https://img.icons8.com/fluency/96/laptop.png">
-        <h3>Laptop Predictor</h3>
-        <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem;">Enterprise Edition</p>
-    </div>
-    """, unsafe_allow_html=True)
+    # Logo yako (con.png)
+    try:
+        with open("pic.jpg", "rb") as f:
+            logo_base64 = base64.b64encode(f.read()).decode()
+        st.markdown(f"""
+        <div class="sidebar-logo">
+            <img src="data:image/png;base64,{logo_base64}" width="70">
+            <h3>Laptop Predictor</h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem;">Enterprise Edition</p>
+        </div>
+        """, unsafe_allow_html=True)
+    except FileNotFoundError:
+        st.warning("Logo haipatikani, tumia default icon.")
+        st.image("https://img.icons8.com/fluency/96/laptop.png", width=70)
+
+    # Navigation... (endelea na code yako iliyobaki)
     
     # Navigation
     page = st.radio(
