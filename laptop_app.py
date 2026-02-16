@@ -350,19 +350,7 @@ with st.sidebar:
     
     st.markdown("---")
     
-    # System Status
-    st.markdown("### System Status")
-    if df is not None:
-        st.markdown(f"Database: Connected ({len(df)} records)")
-    else:
-        st.markdown("Database: Disconnected")
-    
-    if base_model:
-        st.markdown(f"AI Models: Active (Accuracy: {base_model['dt_r2']*100:.1f}%)")
-    else:
-        st.markdown("AI Models: Inactive")
-    
-    st.markdown("---")
+ 
     
     # Contact - Phone Number tu (0655540648)
     st.markdown("### 24/7 Support")
