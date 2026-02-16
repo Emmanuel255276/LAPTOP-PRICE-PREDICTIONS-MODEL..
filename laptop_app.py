@@ -1,6 +1,5 @@
 # laptop_app.py
-# Laptop Price Predictor Enterprise Edition - FIXED VERSION
-# No caching errors, optimized for Streamlit Cloud
+# Laptop Price Predictor Enterprise Edition - NO EMOJIS, PROFESSIONAL CLEAN VERSION
 
 import streamlit as st
 import pandas as pd
@@ -26,13 +25,13 @@ warnings.filterwarnings('ignore')
 # =============================================================================
 st.set_page_config(
     page_title="Laptop Price Predictor | Enterprise AI",
-    page_icon="🎯",
+    page_icon=None,  # Hakuna emoji
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # =============================================================================
-# CUSTOM CSS - Enterprise Styling
+# CUSTOM CSS - Enterprise Styling (hakuna emojis)
 # =============================================================================
 st.markdown("""
 <style>
@@ -124,11 +123,66 @@ st.markdown("""
         margin-top: 3rem;
         text-align: center;
     }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+    }
+    
+    .sidebar-logo {
+        text-align: center;
+        padding: 1rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .sidebar-logo img {
+        width: 60px;
+        height: 60px;
+        filter: brightness(0) invert(1);
+    }
+    
+    .sidebar-logo h3 {
+        color: white;
+        margin-top: 0.5rem;
+        font-weight: 600;
+    }
+    
+    /* Sidebar info cards */
+    .sidebar-info {
+        background: rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+    
+    .sidebar-info .label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        opacity: 0.7;
+    }
+    
+    .sidebar-info .value {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    
+    .sidebar-phone {
+        background: #ffd700;
+        color: #1e3c72;
+        border-radius: 50px;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 1rem;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # =============================================================================
-# DATA LOADING - WITHOUT CACHING ERRORS
+# DATA LOADING
 # =============================================================================
 @st.cache_data(show_spinner=False)
 def load_data():
@@ -142,7 +196,7 @@ def load_data():
 
 @st.cache_resource(show_spinner=False)
 def load_base_model():
-    """Load only the base model (not the full object)"""
+    """Load only the base model"""
     try:
         model_data = joblib.load('laptop_price_model.pkl')
         return {
@@ -162,12 +216,6 @@ def load_base_model():
 if 'prediction_history' not in st.session_state:
     st.session_state.prediction_history = []
 
-if 'models_trained' not in st.session_state:
-    st.session_state.models_trained = False
-
-if 'additional_models' not in st.session_state:
-    st.session_state.additional_models = {}
-
 # =============================================================================
 # LOAD DATA AND BASE MODEL
 # =============================================================================
@@ -175,49 +223,83 @@ df = load_data()
 base_model = load_base_model()
 
 # =============================================================================
-# ENTERPRISE HEADER
+# ENTERPRISE HEADER (hakuna emoji)
 # =============================================================================
 st.markdown("""
 <div class="enterprise-header">
     <div class="enterprise-title">Laptop Price Predictor</div>
-    <div class="enterprise-subtitle">Enterprise AI-Powered Pricing Intelligence System | Made in Tanzania 🇹🇿</div>
+    <div class="enterprise-subtitle">Enterprise AI-Powered Pricing Intelligence System | Made in Tanzania</div>
 </div>
 """, unsafe_allow_html=True)
 
 # =============================================================================
-# SIDEBAR - Professional Navigation
+# SIDEBAR - Professional Navigation (hakuna emoji, iko info za brands na total)
 # =============================================================================
 with st.sidebar:
     # Logo
-    st.image("https://img.icons8.com/fluency/96/laptop.png", width=80)
-    st.markdown("### Laptop Predictor")
-    st.markdown("*Enterprise Edition v3.0*")
-    
-    st.markdown("---")
+    st.markdown("""
+    <div class="sidebar-logo">
+        <img src="https://img.icons8.com/fluency/96/laptop.png">
+        <h3>Laptop Predictor</h3>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem;">Enterprise Edition</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Navigation
     page = st.radio(
         "Navigation",
-        [" Dashboard", " Price Predictor", " Analytics", " Model Hub", " History"],
-        index=0
+        ["Dashboard", "Price Predictor", "Analytics", "Model Hub", "History"],
+        index=0,
+        label_visibility="collapsed"
     )
     
     st.markdown("---")
     
-   
+    # Information Section - Brands na Total Laptops
+    if df is not None:
+        total_brands = df['Company'].nunique()
+        total_laptops = len(df)
+        
+        st.markdown(f"""
+        <div class="sidebar-info">
+            <div class="label">Total Laptop Brands</div>
+            <div class="value">{total_brands}</div>
+        </div>
+        <div class="sidebar-info">
+            <div class="label">Total Laptops in Database</div>
+            <div class="value">{total_laptops:,}</div>
+        </div>
+        """, unsafe_allow_html=True)
     
+    st.markdown("---")
     
+    # System Status - simple text
+    st.markdown("### System Status")
+    if df is not None:
+        st.markdown(f"Database: Connected ({len(df)} records)")
+    else:
+        st.markdown("Database: Disconnected")
     
-    # Support
+    if base_model:
+        st.markdown(f"AI Models: Active (Accuracy: {base_model['dt_r2']*100:.1f}%)")
+    else:
+        st.markdown("AI Models: Inactive")
+    
+    st.markdown("---")
+    
+    # Contact - Phone Number tu (hakuna email)
     st.markdown("### 24/7 Support")
-    st.markdown("📞 +255 655 540 648")
-
+    st.markdown("""
+    <div class="sidebar-phone">
+        +255 123 456 789
+    </div>
+    """, unsafe_allow_html=True)
 
 # =============================================================================
 # DASHBOARD PAGE
 # =============================================================================
-if page == "🏠 Dashboard":
-    st.markdown("##  Executive Dashboard")
+if page == "Dashboard":
+    st.markdown("## Executive Dashboard")
     
     if df is None:
         st.error("Unable to load data. Please check your files.")
@@ -262,23 +344,23 @@ if page == "🏠 Dashboard":
         col1, col2 = st.columns(2)
         
         with col1:
-            st.markdown("### 💰 Price Distribution")
+            st.markdown("### Price Distribution")
             fig = px.histogram(df, x='Price_Tsh', nbins=50, title='Price Distribution')
             fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
             st.plotly_chart(fig, use_container_width=True)
         
         with col2:
-            st.markdown("### 🏢 Top Brands")
+            st.markdown("### Top Brands by Average Price")
             brand_avg = df.groupby('Company')['Price_Tsh'].mean().sort_values(ascending=False).head(10)
             fig = px.bar(x=brand_avg.values, y=brand_avg.index, orientation='h', title='Average Price by Brand')
             fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
             st.plotly_chart(fig, use_container_width=True)
 
 # =============================================================================
-# PRICE PREDICTOR PAGE - FIXED
+# PRICE PREDICTOR PAGE
 # =============================================================================
-elif page == "🤖 Price Predictor":
-    st.markdown("## 🤖 AI Price Predictor")
+elif page == "Price Predictor":
+    st.markdown("## AI Price Predictor")
     
     if df is None or base_model is None:
         st.error("System resources not available. Please contact support.")
@@ -290,7 +372,7 @@ elif page == "🤖 Price Predictor":
         
         # Create form
         with st.form("prediction_form"):
-            st.markdown("### 📝 Enter Laptop Specifications")
+            st.markdown("### Enter Laptop Specifications")
             
             col1, col2, col3 = st.columns(3)
             
@@ -318,7 +400,7 @@ elif page == "🤖 Price Predictor":
                 ["Decision Tree", "Linear Regression", "Random Forest", "Gradient Boosting", "Ensemble (All)"]
             )
             
-            submitted = st.form_submit_button("🚀 Predict Price", use_container_width=True)
+            submitted = st.form_submit_button("Predict Price", use_container_width=True)
         
         if submitted:
             # Prepare input data
@@ -414,7 +496,7 @@ elif page == "🤖 Price Predictor":
                         predictions['Gradient Boosting'] = gb.predict(X_scaled)[0]
             
             # Display results
-            st.markdown("### 📊 Prediction Results")
+            st.markdown("### Prediction Results")
             
             if len(predictions) > 1:
                 cols = st.columns(len(predictions))
@@ -457,17 +539,17 @@ elif page == "🤖 Price Predictor":
             
             st.markdown("""
             <div class="enterprise-success">
-                ✅ Prediction saved to history!
+                Prediction saved to history.
             </div>
             """, unsafe_allow_html=True)
 
 # =============================================================================
 # ANALYTICS PAGE
 # =============================================================================
-elif page == "📊 Analytics" and df is not None:
-    st.markdown("## 📊 Advanced Analytics")
+elif page == "Analytics" and df is not None:
+    st.markdown("## Advanced Analytics")
     
-    tab1, tab2, tab3 = st.tabs(["📈 Distributions", "🔗 Correlations", "📊 Brand Analysis"])
+    tab1, tab2, tab3 = st.tabs(["Distributions", "Correlations", "Brand Analysis"])
     
     with tab1:
         col1, col2 = st.columns(2)
@@ -494,22 +576,22 @@ elif page == "📊 Analytics" and df is not None:
 # =============================================================================
 # MODEL HUB PAGE
 # =============================================================================
-elif page == "⚙️ Model Hub" and base_model:
-    st.markdown("## ⚙️ AI Model Hub")
+elif page == "Model Hub" and base_model:
+    st.markdown("## AI Model Hub")
     
-    st.markdown("### 📊 Model Performance")
+    st.markdown("### Model Performance")
     
     model_data = [{
         'Model': 'Decision Tree',
         'R² Score': f"{base_model['dt_r2']:.4f}",
         'RMSE': f"{base_model['dt_rmse']:,.0f} Tsh",
-        'Status': '✅ Active'
+        'Status': 'Active'
     }]
     
     model_df = pd.DataFrame(model_data)
     st.dataframe(model_df, use_container_width=True)
     
-    st.markdown("### 🚀 Train Additional Models")
+    st.markdown("### Train Additional Models")
     if st.button("Train All Models"):
         with st.spinner("Training models... This may take a moment."):
             st.info("Models will be trained on-the-fly during prediction.")
@@ -517,8 +599,8 @@ elif page == "⚙️ Model Hub" and base_model:
 # =============================================================================
 # HISTORY PAGE
 # =============================================================================
-elif page == "📜 History":
-    st.markdown("## 📜 Prediction History")
+elif page == "History":
+    st.markdown("## Prediction History")
     
     if len(st.session_state.prediction_history) == 0:
         st.info("No predictions yet. Use the Price Predictor to make predictions.")
@@ -538,7 +620,7 @@ elif page == "📜 History":
         st.dataframe(history_df, use_container_width=True)
         
         # Download
-        if st.button("📥 Download History"):
+        if st.button("Download History"):
             csv = history_df.to_csv(index=False)
             b64 = base64.b64encode(csv.encode()).decode()
             href = f'<a href="data:file/csv;base64,{b64}" download="prediction_history.csv">Download CSV</a>'
@@ -555,6 +637,7 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
 
             
 
