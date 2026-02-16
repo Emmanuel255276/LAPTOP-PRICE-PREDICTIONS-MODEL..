@@ -310,13 +310,13 @@ st.markdown("""
 # SIDEBAR - Professional Navigation
 # =============================================================================
 with st.sidebar:
-    # Logo yako (con.png)
+    # Jaribu kupakia pic.jpg
     try:
         with open("pic.jpg", "rb") as f:
             logo_base64 = base64.b64encode(f.read()).decode()
         st.markdown(f"""
         <div class="sidebar-logo">
-            <img src="data:image/png;base64,{logo_base64}" width="70">
+            <img src="data:image/jpeg;base64,{logo_base64}" width="70" alt="Company Logo">
             <h3>Laptop Predictor</h3>
             <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem;">Enterprise Edition</p>
         </div>
